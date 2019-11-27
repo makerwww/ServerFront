@@ -1,0 +1,196 @@
+*{
+	margin: 0;
+	padding: 0;
+	/* font-family: Arial; */
+	font-family: 'Roboto', sans-serif;
+	color: #333;
+}
+
+/* Comon styles */
+.full-width{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.calc-height{
+	height: calc(100vh - 260px);
+}
+.bg-grey{
+	background-color: #323232;
+}
+.bg-lgrey{
+	background-color: lightgrey;
+	box-shadow: 0px 2px 12px 3px rgb(140, 140, 140);
+}
+.bg-lgreen{
+	background-color: #b0ffb2;
+}
+section{
+	font-size: 26px;
+}
+
+/* Header block with time and weather styles */
+.info{
+	width: 1024px;
+	min-height: 160px;
+	display: flex;
+	justify-content: space-between;
+}
+.info__time-date{
+	width: 50%;
+	display: flex;
+	padding: 25px;
+	box-sizing: border-box;
+	align-items: center;
+	font-size: 26px;
+}
+.info__weather{
+	width: 50%;
+	display: flex;
+	padding: 25px;
+	box-sizing: border-box;
+	justify-content: flex-end;
+	align-items: center;
+	font-size: 26px;
+}
+
+/* Block with controllers for server */
+.controllers{
+	display: flex;
+	max-width: 1024px;
+	min-width: 750px;
+	min-height: 490px;
+	min-height: 65vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 100px;
+	padding-top: 30px;
+}
+.controllers__items{
+	display: flex;
+	flex-flow: column;
+	width: 90%;
+	align-items: center;
+}
+.controllers h2{
+	font-size: 35px;
+	margin: 25px 0;
+}
+article{
+	display: flex;
+	width: 80%;
+	min-height: 60px;
+	justify-content: space-around;
+	align-items: center;
+	margin: 10px;
+	padding: 0 15px;
+	box-shadow: 0px 0px 5px 2px lightgrey;
+	border-radius: 5px;
+}
+article section:first-of-type{
+	width: 45%;
+}
+article section{
+	width: 30%;
+	text-align: center;
+}
+/* Styles for make checkbox like on Apple */
+.checkbox input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	margin: 10px 0 0 20px;
+}
+.checkbox__text {
+	position: relative;
+	padding: 0 0 0 60px;
+	left: 40%;
+	top: -8px;
+	cursor: pointer;
+}
+.checkbox__text:before {
+	content: '';
+	position: absolute;
+	top: -4px;
+	left: 0;
+	width: 50px;
+	height: 26px;
+	border-radius: 13px;
+	background: #CDD1DA;
+	box-shadow: inset 0 2px 3px rgba(0,0,0,.2);
+	transition: .2s;
+}
+.checkbox__text:after {
+	content: '';
+	position: absolute;
+	top: -2px;
+	left: 2px;
+	width: 22px;
+	height: 22px;
+	border-radius: 10px;
+	background: #FFF;
+	box-shadow: 0 2px 5px rgba(0,0,0,.3);
+	transition: .2s;
+}
+.checkbox input:checked + .checkbox__text:before {
+	background: #9FD468;
+}
+.checkbox input:checked + .checkbox__text:after {
+	left: 26px;
+}
+.checkbox input:focus + .checkbox__text:before {
+	box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px rgba(255,255,0,.7);
+}
+
+/* footer */
+footer{
+	width: 100%;
+	height: 75px;
+	background-color: grey;
+	display: flex;
+	align-items: center;
+	padding-left: 35px;
+	box-sizing: border-box;
+	box-shadow: 0px -2px 15px 2px grey;
+}
+footer p{
+	width: 1024px;
+	margin: 0 auto;
+	color: white;
+	font-size: 24px;
+}
+
+@media all and (max-width: 430px){
+	.info{
+		flex-direction: column;
+	}
+	.info__time-date{
+		width: 100%;
+		justify-content: center;
+		font-size: 22px;
+		text-align: center;
+	}
+	.info__weather{
+		width: 100%;
+		justify-content: center;
+	}
+	article{
+		width: 90%;
+		height: 280px;
+		flex-direction: column;
+	}
+	.controllers{
+		min-width: 100%;
+	}
+	.controllers h2{
+		font-size: 30px;
+		text-align: center;
+	}
+	.checkbox__text{
+		left: 20%;
+	}
+	footer p{
+		font-size: 16px;
+	}
+}
