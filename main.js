@@ -3,12 +3,19 @@ const controllers = {
 	controllersBlock: document.querySelector('.controllers__items'),
 	items: ['Реле 0', 'Реле 1', 'ШИМ Модулятор 0', 'ШИМ Модулятор 1', 'Выход 0', 'Выход 1'],
 	thisLabel: 0,
+	waitForServer: false,
 	currentState: [],
+	receivedState: [],
 
 	init(){
-		this.createControllers()
-		this.checkState()
-		this.changeCheckState()
+		this.getData()
+		if(!this.waitForServer){
+			setTimeout(()=>{
+				this.createControllers()
+				this.checkState()
+				this.changeCheckState()
+			},500)
+		}	
 	},
 	// создание разметки
 	createControllers (){
@@ -30,7 +37,8 @@ const controllers = {
 	},
 	// Добавляет значение checked в зависимости от текущего состояния
 	addControllerState (index){  
-		if(this.currentState[index] == true){
+		this.getData();
+		if(this.receivedState[index] == true){
 			return 'checked';
 		} return '';
 	},
@@ -77,14 +85,29 @@ const controllers = {
 			currentState: arr,
 		};
 		
-		let json = JSON.stringify(stateObj);
-		return console.log(json);
-
-
+		let jsonInfo = JSON.stringify(stateObj);
+		this.sendData(jsonInfo)
+		console.log(jsonInfo);	
+		return jsonInfo;
 	},
-//для получения данных 
-	getCurrentStateArr() {
-
+//для отправки данных 
+	sendData(data) {
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', '/request', true);
+		xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+		xhr.send(data);
+		console.log('sent');
+		
+	},
+//Загрузка с сервера данных и обновление массива состояний
+	getData(){
+		let getJSON = fetch('/request/currState.json',)
+		.then(response => response.json())
+		.then(data => {
+			this.receivedState = [...data.state]
+			this.waitForServer = true
+			return this.receivedState
+		})
 	},
 
 };
